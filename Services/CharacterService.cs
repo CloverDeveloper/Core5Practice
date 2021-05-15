@@ -20,7 +20,7 @@ namespace Practice.Services
         /// </summary>
         /// <param name="newCharacter"></param>
         /// <returns></returns>
-        public List<Character> AddCharacter(Character newCharacter)
+        public async Task<List<Character>> AddCharacter(Character newCharacter)
         {
             characters.Add(newCharacter);
 
@@ -31,7 +31,7 @@ namespace Practice.Services
         /// 取得所有角色
         /// </summary>
         /// <returns></returns>
-        public List<Character> GetAll()
+        public async Task<List<Character>> GetAll()
         {
             return characters;
         }
@@ -41,7 +41,7 @@ namespace Practice.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Character GetById(int id)
+        public async Task<Character> GetById(int id)
         {
             return characters.FirstOrDefault(c => c.Id == id);
         }
