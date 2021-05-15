@@ -15,7 +15,7 @@ namespace Practice.Controllers
         private static List<Character> characters = new List<Character>() 
         { 
             new Character(),
-            new Character{ Name="Ash"}
+            new Character{ Id=1, Name="Ash"}
         };
 
         [HttpGet("GetAll")]
@@ -25,10 +25,11 @@ namespace Practice.Controllers
             return Ok(characters);
         }
 
-        [HttpGet] // Swagger 需要加
-        public ActionResult<Character> GetSingle()
+        // Swagger 需要加
+        [HttpGet("{id}")]
+        public ActionResult<Character> GetSingle(int id)
         {
-            return Ok(characters[0]);
+            return Ok(characters.FirstOrDefault(c => c.Id == id));
         }
 
     }
