@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Practice.Interfaces;
+using Practice.Services;
 
 namespace Practice
 {
@@ -32,6 +34,9 @@ namespace Practice
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Practice", Version = "v1" });
             });
+
+            // µù¥U ICharacterService
+            services.AddScoped<ICharacterService, CharacterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
