@@ -22,20 +22,20 @@ namespace Practice.Controllers
 
         [HttpGet("GetAll")]
         // [Route("GetAll")] 2 種路由寫法都可以
-        public async Task<ActionResult<List<Character>>> Get()
+        public async Task<ActionResult<ServiceResponse<List<Character>>>> Get()
         {
             return Ok(await _characterService.GetAll());
         }
 
         // Swagger 需要加
         [HttpGet("{id}")]
-        public async Task<ActionResult<Character>> GetSingle(int id)
+        public async Task<ActionResult<ServiceResponse<Character>>> GetSingle(int id)
         {
             return Ok(await _characterService.GetById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Character>>> AddCharacter(Character newCharacter)
+        public async Task<ActionResult<ServiceResponse<List<Character>>>> AddCharacter(Character newCharacter)
         {
             return Ok(await _characterService.AddCharacter(newCharacter));
         }

@@ -15,20 +15,20 @@ namespace Practice.Interfaces
         /// 取得所有角色
         /// </summary>
         /// <returns></returns>
-        Task<List<Character>> GetAll();
+        Task<ServiceResponse<List<Character>>> GetAll();
 
         /// <summary>
         /// 依 ID 取得角色
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<Character> GetById(int id);
+        Task<ServiceResponse<Character>> GetById(int id);
 
         /// <summary>
         /// 新增角色
         /// </summary>
         /// <param name="newCharacter"></param>
         /// <returns></returns>
-        Task<List<Character>> AddCharacter(Character newCharacter);
+        Task<ServiceResponse<List<Character>>> AddCharacter(Character newCharacter);
     }
 }
