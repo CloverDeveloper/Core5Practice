@@ -1,4 +1,5 @@
-﻿using Practice.Dtos.Character;
+﻿using AutoMapper;
+using Practice.Dtos.Character;
 using Practice.Interfaces;
 using Practice.Models;
 using System;
@@ -16,6 +17,13 @@ namespace Practice.Services
             new Character{ Id=1, Name="Ash"}
         };
 
+        private readonly IMapper _mapper;
+
+        public CharacterService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
         /// <summary>
         /// 新增角色
         /// </summary>
@@ -23,10 +31,13 @@ namespace Practice.Services
         /// <returns></returns>
         public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
-            characters.Add(newCharacter);
+            Character character = _mapper.Map<Character>(newCharacter);
+            character.Id = characters.Max(c => c.Id) + 1;
+
+            characters.Add(character);
 
             ServiceResponse<List<GetCharacterDto>> res = new ServiceResponse<List<GetCharacterDto>>();
-            res.Data = characters;
+            res.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
 
             return res;
         }
@@ -38,7 +49,7 @@ namespace Practice.Services
         public async Task<ServiceResponse<List<GetCharacterDto>>> GetAll()
         {
             ServiceResponse<List<GetCharacterDto>> res = new ServiceResponse<List<GetCharacterDto>>();
-            res.Data = characters;
+            res.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
 
             return res;
         }
@@ -52,7 +63,7 @@ namespace Practice.Services
         {
             ServiceResponse<GetCharacterDto> res = new ServiceResponse<GetCharacterDto>();
 
-            res.Data = characters.FirstOrDefault(c => c.Id == id);
+            res.Data = _mapper.Map<GetCharacterDto>(characters.FirstOrDefault(c => c.Id == id));
 
             return res;
         }

@@ -35,6 +35,9 @@ namespace Practice
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Practice", Version = "v1" });
             });
 
+            // µù¥U AutoMapper
+            services.AddAutoMapper(typeof(Startup));
+
             // µù¥U ICharacterService
             services.AddScoped<ICharacterService, CharacterService>();
         }
