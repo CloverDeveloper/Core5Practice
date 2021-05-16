@@ -1,4 +1,5 @@
-﻿using Practice.Interfaces;
+﻿using Practice.Dtos.Character;
+using Practice.Interfaces;
 using Practice.Models;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,11 @@ namespace Practice.Services
         /// </summary>
         /// <param name="newCharacter"></param>
         /// <returns></returns>
-        public async Task<ServiceResponse<List<Character>>> AddCharacter(Character newCharacter)
+        public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
             characters.Add(newCharacter);
 
-            ServiceResponse<List<Character>> res = new ServiceResponse<List<Character>>();
+            ServiceResponse<List<GetCharacterDto>> res = new ServiceResponse<List<GetCharacterDto>>();
             res.Data = characters;
 
             return res;
@@ -34,9 +35,9 @@ namespace Practice.Services
         /// 取得所有角色
         /// </summary>
         /// <returns></returns>
-        public async Task<ServiceResponse<List<Character>>> GetAll()
+        public async Task<ServiceResponse<List<GetCharacterDto>>> GetAll()
         {
-            ServiceResponse<List<Character>> res = new ServiceResponse<List<Character>>();
+            ServiceResponse<List<GetCharacterDto>> res = new ServiceResponse<List<GetCharacterDto>>();
             res.Data = characters;
 
             return res;
@@ -47,9 +48,9 @@ namespace Practice.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ServiceResponse<Character>> GetById(int id)
+        public async Task<ServiceResponse<GetCharacterDto>> GetById(int id)
         {
-            ServiceResponse<Character> res = new ServiceResponse<Character>();
+            ServiceResponse<GetCharacterDto> res = new ServiceResponse<GetCharacterDto>();
 
             res.Data = characters.FirstOrDefault(c => c.Id == id);
 
